@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  db:
+    container_name: db
+    image: postgres:13.3-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=perntodo
+    volumes:
+      - D:/Docker/postgresdata:/var/lib/postgresql/data
+    ports:
+      - '5431:5432'
+    networks:
+      - todo-app-network       
+  server:
+    container_name: server
+    image: server1:v01
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@172.24.16.1:5431/perntodo
+      - SESSION_SECRET=mysecretkey
+    networks:
+      - todo-app-network
+  client:
+    container_name: client
+    image: client1:v01
+    ports:
+      - 3000:3000
+    networks:
+      - todo-app-network
+networks:
+  todo-app-network:
+volumes:
+  postgres-data:    

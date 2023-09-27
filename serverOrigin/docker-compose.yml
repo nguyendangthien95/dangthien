@@ -1,0 +1,17 @@
+version: '3'
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5431
+      POSTGRES_DB: perntodo
+    networks:
+      - todo-app-network
+networks:
+  todo-app-network:
+

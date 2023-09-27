@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      #- NODE_ENV=production
+      - DATABASE_URL=postgres://postgres:postgres@172.24.16.1:5431/perntodo
+      - SESSION_SECRET=mysecretkey
+    networks:
+      - todo-app-network
+networks:
+  todo-app-network:
+  
+
